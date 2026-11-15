@@ -25,8 +25,17 @@ Browsers may only call the functions from allowed origins
 plus the WEB_ORIGINS secret (staging has http://localhost:5173; never set
 localhost on production).
 
-## Hosting (owner decision)
+## Hosting: GitHub Pages
 
-Any static host works; point `circle.thevegascircle.com` at it with a CNAME at
-HostGator. GitHub Pages from this repo, Cloudflare Pages or Netlify are all
-free for this size. Production needs the CORS functions deployed first.
+Published from the public repo `syminisolutions/vegas-circle-web` (this
+backend repo stays private). Publish changes with `sh ops/publish_web.sh`.
+
+- Now (preview, staging data): https://syminisolutions.github.io/vegas-circle-web/
+  (staging WEB_ORIGINS allows https://syminisolutions.github.io).
+- At 1.1 launch (production data):
+  1. Deploy 0016-0021 and the community/me/account functions to production
+     (owner approval). Do not set WEB_ORIGINS on production.
+  2. Add `web/CNAME` containing `circle.thevegascircle.com` and publish.
+  3. At HostGator DNS add: CNAME `circle` -> `syminisolutions.github.io`.
+  4. In the repo's Settings > Pages, wait for the domain check, then tick
+     "Enforce HTTPS". config.js switches to production on that hostname.
